@@ -1,0 +1,17 @@
+
+<h1> All companies </h2>
+
+
+
+
+
+<%=  form_with  method: :companies do |form| %>
+  name:<%= form.text_field :name %><br>
+  address<%= form.text_field :address %><br>
+  phone:<%= form.text_field :phone %><br>
+
+  <%= form.submit %>
+<% end %>
+
+
+

@@ -1,0 +1,13 @@
+<%= form_for(@order) do |f| %>
+    <%= f.label :name %>
+  <p> <%= f.text_field :name%><p>
+    <%= f.label :type %>
+   <p> <%= f.text_field :type %> <p>
+   <%= f.label :price %>
+   <p> <%= f.number_field :price%><p>
+    <%= f.label :quantity %>
+   <p> <%= f.number_field :quantity %><p>
+    <%= f.label :total %>
+   <p> <%= f.number_field :total %><p>
+    <%= f.submit %>
+<% end %>

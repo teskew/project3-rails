@@ -1,0 +1,34 @@
+
+<% if @company %>
+<h1>New Order for <%= @company.name %> </h1>
+ <% else %>
+ <h1> New Order </h1>
+<% end %>
+
+<% if order.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(object.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+    <ul>
+      <% order.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+   
+<%= form_for([@company, @order]) do |f| %>
+   <% if !@company %>
+    <%= f.label :company %>
+    <%= f.collection_select :company_id, Company.all, :id,  :name %><br><br>
+    <% else %>
+    <%= f.hidden_field :order_id%>
+    <% end %>
+    <%= f.label :type %>
+    <%= f.text_field :type %> <br><br>
+    <%= f.label :quantity %>
+    <%= f.number_field :quantity  %><br><br>
+    
+    <%= f.submit %>
+<% end %>
+

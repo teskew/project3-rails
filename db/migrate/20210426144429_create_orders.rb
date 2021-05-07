@@ -6,7 +6,7 @@ class CreateOrders < ActiveRecord::Migration[6.1]
        t.decimal :price
        t.integer :quantity
        t.decimal :total
-       t.belongs_to :order
+       t.belongs_to :company
        t.belongs_to :user
        t.timestamps
     end

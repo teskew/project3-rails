@@ -16,8 +16,10 @@ ActiveRecord::Schema.define(version: 2021_04_26_144454) do
     t.string "name"
     t.string "address"
     t.integer "phone"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_companies_on_user_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -26,11 +28,11 @@ ActiveRecord::Schema.define(version: 2021_04_26_144454) do
     t.decimal "price"
     t.integer "quantity"
     t.decimal "total"
-    t.integer "order_id"
+    t.integer "company_id"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["order_id"], name: "index_orders_on_order_id"
+    t.index ["company_id"], name: "index_orders_on_company_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 

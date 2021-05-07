@@ -1,0 +1,2 @@
+<h2><%= @order.name%> - <%= @order.user.username%></h2>
+<h2> The Company:<%= link_to @order.company.name, company_path(@order.company_id)%></h2>
