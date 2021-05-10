@@ -1,17 +1,16 @@
 
 
-
-<h2><%= @company.name%> </h2>
+<h2><%= @company.company_name%> </h2>
 <h2><%= @company.address%></h2>
-<h2><%= @company.phone%></h2>
+
 
 <h2>Order By:<%= @company.user.username%></h2>
 
-<p><%= link_to 'See all orders', company_orders_path(@company)%> </p>
-<p><%= link_to 'Add new orders', new_company_orders_path(@company)%> </p>
+<p><%= link_to 'See all orders', company_order_path(@company,@order)%> </p>
+<p><%= link_to 'Add new orders', new_company_order_path(@company, @order)%> </p>
 
 <h2>Orders</h2>
 
 <%= @company.orders.each do |o| %> 
-<li><%= o.user.username %> orderd "<%= link_to o.name, order_path(@company,o)%>"</li>
+<li><%= o.user.username %> orderd "<%= link_to o.order_name, order_path(@company,o)%>"</li>
  <% end %>

@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
   belongs_to :company
   belongs_to :user
- validates :order, presence: true
+ validates :name, presence: true
 end

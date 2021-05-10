@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'application#home'
+  root to: 'sessions#home'
 
    get '/signup', to: 'users#new'
    post '/signup', to: 'users#create'
@@ -11,17 +11,19 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
  
-  resources :orders
+  
 
+  
+ 
+  
+  resources :companies  do
+    resources :orders
+  end
+  resources :orders
+  
   resources :users do
-    resources :companies, only: [:new, :create, :index ]
+    resources :companies, shallow: true
   end
-  
-  
-  resources :companies do
-    resources :orders, only: [:new, :create, :index]
-  end
-  
 
 end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

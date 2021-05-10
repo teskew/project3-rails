@@ -11,12 +11,12 @@
 
   <body>
   <div>  
- <a href="/"> Home</a>
+ 
   <% if logged_in?%><br><br>
   <%= link_to "Add Company", new_company_path %>|
   <%= link_to "All Company ", companies_path %>|
   <%= link_to "All Order ", orders_path %>|
-  <%= button_to "Logout", logout_path, method: "delete"%>|
+  <%=button_to "Logout", logout_path, method: "delete" %>|
   <% else %><br>
   <%= link_to "Sign Up", signup_path %>|
   <%= link_to "Log In", login_path %>|
