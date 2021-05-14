@@ -1,11 +1,16 @@
-<h1>All Orders</h1>
-<%= form_with model: @order do |f| %>
-    <%= f.label :Beer_name %>
-  <p> <%= f.text_field :beer_name%><p>
-    <%= f.label :Description %>
-   <p> <%= f.text_field :description%><p>
-    <%= f.label :quantity %>
-   <p> <%= f.number_field :quantity %><p>
-   
-    <%= f.submit %>
+<br>
+<br>
+<% if @order %>
+    <h1><%= @order.beer_name %></h1>
+<% else %> 
+    <h1>All Orders</h1>
+<% end %> 
+<%= render partial: "order", collection: @orders, as: :o %>
+<br>
+
+
+<% if @order %>
+    <%= link_to "New order", new_company_order_path %>
+<% else %>
+    <%= link_to "New order", new_order_path %>
 <% end %>

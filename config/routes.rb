@@ -13,20 +13,17 @@ Rails.application.routes.draw do
  
   
 
-  
- 
+  resources :users do
+    resources :companies
+  end
   
   resources :companies  do
-    resources :orders
+    resources :orders, shallow: true
   end
-  resources :orders
   
-  resources :users do
-    resources :companies, shallow: true
-  end
-
-end
+  resources :orders, only: [:index, :new, :create]
+ 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
    #signed up
   
-
+end

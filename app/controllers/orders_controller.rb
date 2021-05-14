@@ -1,33 +1,45 @@
 class OrdersController < ApplicationController
     before_action :redirect_if_not_logged_in
-  
+    before_action :set_order, except: [:index, :new, :create]
+    
     def index #
-      if params[:company_id] &&  @company = Company.find_by_id(params[:company_id]) 
+      if params[:company_id] && @company = Company.find_by(id:params[:company_id]) 
        @orders = @company.orders #nested
       else
         @error = "That Order doesn't exit" if params[:company_id]
       @orders = Order.all
       end
       
-      end
+      end 
+      
+      def new 
+      #nested and find the order
+      if params[:company_id]
+         @company = Company.find_by(id: params[:company_id]) 
+            @order = @company.orders.build
+       else
+         # @error = "That Order doesn't exit" if params[:company_id]
+            @order = Order.new
+             @order.build_company
+
+        end
+       end
 
       def create 
-        @order = current_user.orders.build(order_params)
+        if params[:company_id]
+          @company = Company.find_by(id: params[:company_id]) 
+        @order = @company.orders.build(order_params)
+        else
+          @order = Order.new(order_params)
+        end
          if @order.save 
-           redirect_to orders_path
+           redirect_to company_orders_path(@order.company) #([@order.companies,@order])
          else 
            render :new
          end 
         end
-    def new 
-   #nested and find the order
-    if params[:company_id] &&  @company = Company.find_by_id(params[:company_id]) 
-         @order = @company.orders.build
-     else
-         @error = "That Order doesn't exit" if params[:company_id]
-         @order = Order.new
-     end
-    end
+        
+   
 
   
     def show 
@@ -49,14 +61,18 @@ class OrdersController < ApplicationController
     end 
   
     def destroy
-     @order.destroy
+    
+
+       #@order = Order.find_by(id: params[:id])
+       @order.destroy
       redirect_to orders_path
     end 
   
     private 
   
     def order_params
-      params.require(:order).permit(:beer_name, :description, :quantity, :user_id, :company_id )
+      params.require(:order).permit(:beer_name, :description, :quantity, 
+      company_attributes:[:company_name, :address] )
     end
 
     # def set_order

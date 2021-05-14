@@ -1,10 +1,18 @@
-<%= form_for(@order) do |f| %>
-    <%= f.label :Beername %>
-  <p> <%= f.text_field :beer_name%><p>
-    <%= f.label :Description %>
-   <p> <%= f.text_field :description %> <p>
+<%= form_for([@company, @order]) do |f| %>
+    <%= f.label :beer_name %>
+    <%= f.text_field :beer_name %>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
     <%= f.label :quantity %>
-   <p> <%= f.number_field :quantity %><p>
-  
+    <%= f.text_field :quantity %>
+    <% if @company %> 
+        <%= f.hidden_field :company_id, value: @company.id %>
+    <% else %> 
+        <h4>Create new Company:</h4>
+            <%= f.fields_for :company do |c| %>
+                <%= c.label :name %>
+                <%= c.text_field :name %>
+            <% end %>
+    <% end %> 
     <%= f.submit %>
 <% end %>

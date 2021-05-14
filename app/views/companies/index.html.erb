@@ -1,17 +1,24 @@
 
-<h1> All companies </h2>
-
-
-
-
-
-<%=  form_with  method: :companies do |form| %>
- Company_name:<%= form.text_field :company_name %><br>
-  address<%= form.text_field :address %><br>
-  
-
-  <%= form.submit %>
+<% @companies.each do |co| %>
+    <%= co.company_name %>
+    <% co.orders.each do |order| %>
+        <li><%= order.beer_name %> </li>
+        <li></li><%= order.description %></li>
+        <li><%= order.quantity %> </li>
+        
+    <% end %>
 <% end %>
 
 
+<h1>Latest orders</h1>
+
+<% @order.each do |order| %>
+binding.pry
+    <li><%= order.company.company_name %>
+     <%= order.beer_name %> 
+      <%= order.description %> 
+      <%= order.quantity %></li>
+     
+    
+<% end %>
 
