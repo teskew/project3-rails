@@ -1,24 +1,23 @@
+<h1>companies#index</h1>
 
-<% @companies.each do |co| %>
-    <%= co.company_name %>
-    <% co.orders.each do |order| %>
-        <li><%= order.beer_name %> </li>
-        <li></li><%= order.description %></li>
-        <li><%= order.quantity %> </li>
-        
+
+
+
+<% @companies.each do |company| %>
+    <%= company.company_name %><br>
+    <% company.orders.each do |order| %><br>
+        <li><%= order.beer_name %> - <%= order.description %>- <%= order.quantity %> </li>
     <% end %>
 <% end %>
 
 
-<h1>Latest orders</h1>
 
-<% @order.each do |order| %>
-binding.pry
-    <li><%= order.company.company_name %>
-     <%= order.beer_name %> 
-      <%= order.description %> 
-      <%= order.quantity %></li>
-     
-    
-<% end %>
+
+
+
+
+
+
+
+
 

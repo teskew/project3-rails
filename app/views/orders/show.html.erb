@@ -1,6 +1,5 @@
-<!--<h2>The Beer name :<%= @order.beer_name%> </h2>
-<h2> Order By: <%= @order.user.username%></h2>
-<h2> The Company:<%= link_to @order.company.company_name, company_path(@order.company_id)%></h2>-->
-<h1> Orders#show</h1>
-<%= render partial: "Order", locals: {o: @order} %>
+
+<h1>Orders#show</h1>
+<%= render partial: "order", locals: {order: @order} %>
 <%= button_to "Delete", order_path(@order), method: 'delete' %>
+

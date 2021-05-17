@@ -1,9 +1,9 @@
 <br>
 <br>
 <% if @company %>
-    <%= render partial: "company", locals: {company: @company} %>
-    <%= link_to 'See this companys orders', company_orders_path(@company) %>
+<!--  <%= render partial: "company", locals: {company: @company} %> -->
+
+    <%= link_to 'See this companys orders', company_orders_path(@company) %><br>
 <% else %>
     <h2>404</h2><h3>Not Found</h3>
 <% end %>
-

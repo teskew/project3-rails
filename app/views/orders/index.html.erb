@@ -1,16 +1,14 @@
 <br>
 <br>
-<% if @order %>
-    <h1><%= @order.beer_name %></h1>
+<% if @company %>
+    <h1><%= @company.company_name %></h1>
 <% else %> 
     <h1>All Orders</h1>
 <% end %> 
-<%= render partial: "order", collection: @orders, as: :o %>
+<%= render partial: "order", collection: @orders, as: :order %>
 <br>
-
-
-<% if @order %>
-    <%= link_to "New order", new_company_order_path %>
+<% if @company %>
+    <%= link_to "New Order", new_company_order_path %>
 <% else %>
-    <%= link_to "New order", new_order_path %>
+    <%= link_to "New Order", new_order_path %>
 <% end %>

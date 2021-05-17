@@ -1,6 +1,6 @@
 class CompaniesController < ApplicationController
-    before_action :set_company, except: [:index, :new, :create]
-    # before_action :redirect_if_not_logged_in
+     before_action :set_company, except: [:index, :new, :create]
+     before_action :redirect_if_not_logged_in
      
      def index #
       if params[:user_id] &&  @user = User.find_by_id(params[:user_id]) 
@@ -23,11 +23,8 @@ class CompaniesController < ApplicationController
         end
     
       def create
-       
-   
         @company = Company.new(company_params)
          if @company.save 
-          
           redirect_to companies_path(@company)
          else
            render :new 
@@ -58,7 +55,10 @@ class CompaniesController < ApplicationController
       private 
 
       def company_params
-        params.require(:company).permit(:company_name, :address, :user_id)
+        params.require(:company).permit(
+          :company_name, 
+          :address, 
+          :user_id)
       end 
 
       def set_company

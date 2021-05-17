@@ -1,12 +1,11 @@
- <p> Beer_Name: <%= o.beer_name %><br>
-      Description: <%= o.description %><br>
-      Quantity: <%= o.quantity %><br><br><br>
-
-        <% if o.company %> 
-           Company: <%= o.company.company_name %><br>
-            Address: <%=o.company.address %>
-           
-
-
-        <% end %>
- </p>    
+  
+ 
+  <p>Beer_Name: <%= order.beer_name %><br>
+     Description: <%= order.description %><br>
+     Quantity: <%= order.quantity %><br>
+        <% if order.company %> 
+            Company: <%= order.company.company_name %>
+            company_address <%=order.company.address %>
+        <% end %> 
+       
+    </p>

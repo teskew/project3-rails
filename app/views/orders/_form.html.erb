@@ -1,17 +1,24 @@
+<% if @order.errors.any? %>
+<% @order.errors.full.messages.each do |mess| %>
+<li style="color:" green><%=mess %></li>
+   <% end %>
+ <% end %>
+
+        
 <%= form_for([@company, @order]) do |f| %>
     <%= f.label :beer_name %>
     <%= f.text_field :beer_name %>
     <%= f.label :description %>
-    <%= f.text_field :description %>
+    <%= f.text_field :description %> 
     <%= f.label :quantity %>
-    <%= f.text_field :quantity %>
+    <%= f.number_field :quantity %>
+
     <% if @company %> 
-        <%= f.hidden_field :company_id, value: @company.id %>
-    <% else %> 
-        <h4>Create new Company:</h4>
-            <%= f.fields_for :company do |c| %>
-                <%= c.label :name %>
-                <%= c.text_field :name %>
+    
+        <h4>Create  Company:</h4>
+            <%= f.fields_for :company do |order| %>
+                <%= order.label :company_name %>
+                <%= order.text_field :company_name %>
             <% end %>
     <% end %> 
     <%= f.submit %>
