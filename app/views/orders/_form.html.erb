@@ -7,15 +7,16 @@
         
 <%= form_for([@company, @order]) do |f| %>
     <%= f.label :beer_name %>
-    <%= f.text_field :beer_name %>
+    <%= f.text_field :beer_name %><br><br>
     <%= f.label :description %>
-    <%= f.text_field :description %> 
+    <%= f.text_field :description %><br><br> 
     <%= f.label :quantity %>
-    <%= f.number_field :quantity %>
+    <%= f.number_field :quantity %><br>
 
     <% if @company %> 
-    
-        <h4>Create  Company:</h4>
+    <%= f.hidden_field :company_id, value: @company.id %>
+    <% else %> 
+        <h4>Create Company to Order:</h4>
             <%= f.fields_for :company do |order| %>
                 <%= order.label :company_name %>
                 <%= order.text_field :company_name %>

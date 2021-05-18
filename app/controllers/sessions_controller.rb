@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
       session.clear 
      redirect_to root_path
    #session.delete(:user_id)
-   redirect_to login_path
+   #redirect_to login_path
 end
 
 #  def omniauth

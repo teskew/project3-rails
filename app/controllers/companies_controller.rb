@@ -2,17 +2,15 @@ class CompaniesController < ApplicationController
      before_action :set_company, except: [:index, :new, :create]
      before_action :redirect_if_not_logged_in
      
-     def index #
+    def index #
       if params[:user_id] &&  @user = User.find_by_id(params[:user_id]) 
        @companies = @user.companies #nested
       else
         @error = "That Companies doesn't exit" if params[:company_id]
        @companies = Company.all
      end
-    #  @companies = Company.orders
-    #  @orders = Order.latest_orders
-
     end
+
     
      def new 
         if params[:user_id] &&  @user = User.find_by_id(params[:user_id]) 
@@ -33,19 +31,23 @@ class CompaniesController < ApplicationController
       
 
       def show 
-        @company = Company.find_by_id(params[:id])
+        @company = Company.find_by(id:params[:id])
        # redirect_to companies_path if !@Company
+      end
+
+      def edit
       end
 
       def update 
         if @company.update(company_params)
-            redirect_to companyr_path(@company)
+            redirect_to company_path(@company)
         else 
             render :edit
         end 
       end 
     
       def destroy
+        set_company
         @company.destroy
         redirect_to companies_path
       end 

@@ -33,7 +33,8 @@ class OrdersController < ApplicationController
           @order = Order.new(order_params)
         end
          if @order.save 
-           redirect_to company_orders_path(@order.company) #([@order.companies,@order])
+          # redirect_to company_orders_path(@order.company) #([@order.companies,@order])
+          redirect_to order_path(@order)
          else 
            render :new
          end 
@@ -61,6 +62,7 @@ class OrdersController < ApplicationController
     end 
   
     def destroy
+      set_order
        #@order = Order.find_by(id: params[:id])
        @order.destroy
       redirect_to orders_path
