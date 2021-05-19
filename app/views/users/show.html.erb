@@ -1,8 +1,9 @@
 
   
-<h1>Welcome! <%=@user.username %></h1>
-<h4> Select from nevbare to Order  or to see the order Beer
+<h1>Welcome! <%=@user.username %> </h1>
+<h4> Select  to Order Beer or to see the orders
  </h4>
+    
     <%= form_tag("/logout", method: "delete") do %>
         <% submit_tag "Logout" %>
     <% end %>

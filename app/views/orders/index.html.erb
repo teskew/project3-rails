@@ -3,12 +3,13 @@
 <% if @company %>
     <h1><%= @company.company_name %></h1>
 <% else %> 
+
     <h1>All Orders</h1>
 <% end %> 
 <%= render partial: "order", collection: @orders, as: :order %>
 <br>
-<!--<% if @company %>
-    <%= link_to "New Order", new_company_order_path %>
-<% else %>-->
+<% if @company %>
+    <%= link_to "New Company", new_company_order_path %>
+<% else %>
     <%= link_to "New Order", new_order_path %>
 <% end %>

@@ -1,8 +1,20 @@
 class SessionsController < ApplicationController
-  #
-  def new
+  
+  def destroy #logout
+    if !session[:user_id].nil? #cancelled a
+        session.delete :user_id 
+        @current_user = nil# CNCLED IN aysan
+    else
+       #redirect_to '/login'
+        #session.delete(:user_id)
+       redirect_to login_path #Aysan
+   end
+ end
+  
+  def new #render the login form  
    if logged_in?
-     redirect_to user_path(current_user)
+    # redirect_to user_path(current_user)
+    redirect_to root_path
    end
  end
 
@@ -12,39 +24,32 @@ class SessionsController < ApplicationController
           if user && user.authenticate(params[:user][:password]) 
           session[:user_id] = user.id
           redirect_to user_path(user) 
+          #redirect_to root_path aysan
              else 
           flash[:message] = "Incorrect login info "
-         #redirect_to login_path
-         
+         redirect_to '/login'
+         # render :new  aysan
             end 
     end
 
-    def destroy #logout
-     # redirect_if_not_logged_in
-      session.clear 
-     redirect_to root_path
-   #session.delete(:user_id)
-   #redirect_to login_path
-end
+    
 
-#  def omniauth
-#    user = User.create_from_omniauth(auth)
-
-#    if user.valid?
-#      session[:user_id] = user.id
-#      redirect_to user_path(user.id)
-#    else
-#      flash[:message] = "#{user.errors.full_messages.join("")}."
-#      redirect_to login_path
-#    end
-#  end
-  #
-
-
-
-def auth
-request.env['omniauth.auth']
-end
+    def omniauth 
+    
+      user = User.find_or_create_by(uid: request.env['omniauth.auth'][:uid], provider: request.env['omniauth.auth'][:provider]) do |u|
+        u.username = request.env['omniauth.auth'][:info][:first_name]
+        u.email = request.env['omniauth.auth'][:info][:email]
+       
+        u.password = SecureRandom.hex(16)
+      end 
+      if user.valid?
+        session[:user_id] = user.id # log them 
+        redirect_to root_path
+      else
+        flash[:message]  = user.errors.full_messages.join(", ")
+        redirect_to login_path 
+      end 
  end
+end
  
     

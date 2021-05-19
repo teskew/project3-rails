@@ -15,6 +15,7 @@ class CompaniesController < ApplicationController
      def new 
         if params[:user_id] &&  @user = User.find_by_id(params[:user_id]) 
           @company = @user.companies.build #nested
+          #@company.orders.build 
          else 
          @company = Company.new
          end 
@@ -22,8 +23,9 @@ class CompaniesController < ApplicationController
     
       def create
         @company = Company.new(company_params)
+        #@company = current_user.companies.build(company_params)
          if @company.save 
-          redirect_to companies_path(@company)
+          redirect_to company_path(@company)
          else
            render :new 
          end
@@ -31,8 +33,10 @@ class CompaniesController < ApplicationController
       
 
       def show 
-        @company = Company.find_by(id:params[:id])
+       # @company = Company.find_by(id:params[:id])
        # redirect_to companies_path if !@Company
+       #@order = Order.new 
+       #@orders = @company.orders
       end
 
       def edit
@@ -47,7 +51,7 @@ class CompaniesController < ApplicationController
       end 
     
       def destroy
-        set_company
+       
         @company.destroy
         redirect_to companies_path
       end 

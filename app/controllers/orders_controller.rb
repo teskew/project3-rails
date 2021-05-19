@@ -29,11 +29,12 @@ class OrdersController < ApplicationController
         if params[:company_id]
           @company = Company.find_by(id: params[:company_id]) 
           @order = @company.orders.build(order_params)
+           #added
         else
           @order = Order.new(order_params)
         end
          if @order.save 
-          # redirect_to company_orders_path(@order.company) #([@order.companies,@order])
+          
           redirect_to order_path(@order)
          else 
            render :new
